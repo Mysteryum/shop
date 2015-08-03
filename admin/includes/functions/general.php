@@ -1937,7 +1937,7 @@ function vam_attribute_image_processing($filename,$filetyp,$upload_dir,$thumb_wi
 	}	
 	return true;
 }
-//OPTIONS_UPDATE
+//OPTIONS_UPDATE
 //--------------------------------------------------------------------------------------Ende 
 
    	 function vam_get_extra_fields($customer_id,$languages_id){

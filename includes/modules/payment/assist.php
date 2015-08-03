@@ -62,11 +62,11 @@
     }
 
 // class methods
-    function javascript_validation() {      return false;    }
-    function selection() {      return array('id' => $this->code,                   'module' => $this->title);    }
-    function pre_confirmation_check() {      return false;    }
-    function confirmation() {      return false;    }
-    function process_button() {      global $order, $vamPrice;
+    function javascript_validation() {      return false;    }
+    function selection() {      return array('id' => $this->code,                   'module' => $this->title);    }
+    function pre_confirmation_check() {      return false;    }
+    function confirmation() {      return false;    }
+    function process_button() {      global $order, $vamPrice;
       // получаем следующий номер заказа      // по крайней мере пытаемся
             $my_query = 'SELECT MAX(orders_id) AS orders_id FROM ' . TABLE_ORDERS;
       $max_order_id = vam_db_query($my_query);
@@ -82,19 +82,19 @@
                                vam_draw_hidden_field('Comment', MODULE_PAYMENT_ASSIST_COMMENT . '#' . $order_id_for_assist);
                                      if (MODULE_PAYMENT_ASSIST_SHOP_MODE == 'Test') $process_button_string .= vam_draw_hidden_field('DemoResult', 'AS000');
       
-      return $process_button_string;    }
+      return $process_button_string;    }
     function before_process() {      global $_GET;
-      if ($_GET['assist_error'] == 1) {        vam_redirect(vam_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . MODULE_PAYMENT_ASSIST_TEXT_ERROR_MESSAGE, 'SSL', true, false));      }
-    }
-    function after_process() {      return false;    }
-    function output_error() {      return false;    }
-    function check() {      if (!isset($this->_check)) {        $check_query = vam_db_query("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'MODULE_PAYMENT_ASSIST_STATUS'");        $this->_check = vam_db_num_rows($check_query);      }      return $this->_check;    }
+      if ($_GET['assist_error'] == 1) {        vam_redirect(vam_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . MODULE_PAYMENT_ASSIST_TEXT_ERROR_MESSAGE, 'SSL', true, false));      }
+    }
+    function after_process() {      return false;    }
+    function output_error() {      return false;    }
+    function check() {      if (!isset($this->_check)) {        $check_query = vam_db_query("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'MODULE_PAYMENT_ASSIST_STATUS'");        $this->_check = vam_db_num_rows($check_query);      }      return $this->_check;    }
     function install() {      vam_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_ASSIST_STATUS', 'True', '6', '1', 'vam_cfg_select_option(array(\'True\', \'False\'), ', now())");		vam_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_ASSIST_ALLOWED', '', '6', '2', now())");
       vam_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_ASSIST_SHOP_IDP', '', '6', '3', now())");      vam_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_ASSIST_SHOP_MODE', 'Test', '6', '4', 'vam_cfg_select_option(array(\'Test\', \'Production\'), ', now())");
       vam_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) values ('MODULE_PAYMENT_ASSIST_ZONE', '0', '6', '5', 'vam_get_zone_class_title', 'vam_cfg_pull_down_zone_classes(', now())");
       vam_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_ASSIST_SORT_ORDER', '0', '6', '6', now())");
       vam_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, use_function, date_added) values ('MODULE_PAYMENT_ASSIST_ORDER_STATUS_ID', '0', '6', '7', 'vam_cfg_pull_down_order_statuses(', 'vam_get_order_status_name', now())");
-    }
-    function remove() {      vam_db_query("delete from " . TABLE_CONFIGURATION . " where configuration_key in ('" . implode("', '", $this->keys()) . "')");    }
-    function keys() {      return array('MODULE_PAYMENT_ASSIST_STATUS','MODULE_PAYMENT_ASSIST_ALLOWED','MODULE_PAYMENT_ASSIST_SHOP_IDP','MODULE_PAYMENT_ASSIST_SHOP_MODE','MODULE_PAYMENT_ASSIST_ZONE','MODULE_PAYMENT_ASSIST_SORT_ORDER','MODULE_PAYMENT_ASSIST_ORDER_STATUS_ID');    }  }
+    }
+    function remove() {      vam_db_query("delete from " . TABLE_CONFIGURATION . " where configuration_key in ('" . implode("', '", $this->keys()) . "')");    }
+    function keys() {      return array('MODULE_PAYMENT_ASSIST_STATUS','MODULE_PAYMENT_ASSIST_ALLOWED','MODULE_PAYMENT_ASSIST_SHOP_IDP','MODULE_PAYMENT_ASSIST_SHOP_MODE','MODULE_PAYMENT_ASSIST_ZONE','MODULE_PAYMENT_ASSIST_SORT_ORDER','MODULE_PAYMENT_ASSIST_ORDER_STATUS_ID');    }  }
 ?>

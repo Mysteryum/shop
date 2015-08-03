@@ -267,7 +267,7 @@ define('ENTRY_PASSWORD_NEW_ERROR', 'Ваш Новый пароль должен 
 define('ENTRY_PASSWORD_NEW_ERROR_NOT_MATCHING', 'Поля Подтвердите пароль и Новый пароль должны совпадать.');
 define('PASSWORD_HIDDEN', '--СКРЫТ--');
 
-// manual order box text in includes/boxes/manual_order.php
+// manual order box text in includes/boxes/manual_order.php
 define('BOX_HEADING_MANUAL_ORDER', 'Создание заказов через админку');
 define('BOX_MANUAL_ORDER_CREATE_ACCOUNT', 'Регистрация клиента');
 define('BOX_MANUAL_ORDER_CREATE_ORDER', 'Создать заказ');
